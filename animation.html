@@ -1,0 +1,1199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Learn Animation | Home</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #4a6fa5;
+            --secondary-color: #ff7e5f;
+            --dark-color: #333;
+            --light-color: #f4f4f4;
+            --success-color: #28a745;
+            --font-main: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-main);
+            line-height: 1.6;
+            color: var(--dark-color);
+            background-color: #f9f9f9;
+            overflow-x: hidden;
+        }
+
+        /* Header Styles */
+        header {
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo img {
+            height: 40px;
+            margin-right: 10px;
+        }
+
+        .logo h1 {
+            font-size: 1.5rem;
+            color: var(--primary-color);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-links li {
+            margin-left: 1.5rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark-color);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--secondary-color);
+        }
+
+        .language-switcher {
+            position: relative;
+            margin-left: 1rem;
+        }
+
+        .language-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            color: var(--dark-color);
+            font-weight: 500;
+        }
+
+        .language-btn i {
+            margin-left: 5px;
+        }
+
+        .language-dropdown {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background-color: white;
+            border-radius: 5px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 0.5rem 0;
+            display: none;
+            min-width: 120px;
+        }
+
+        .language-dropdown.show {
+            display: block;
+        }
+
+        .language-dropdown a {
+            display: block;
+            padding: 0.5rem 1rem;
+            text-decoration: none;
+            color: var(--dark-color);
+            transition: background-color 0.3s;
+        }
+
+        .language-dropdown a:hover {
+            background-color: var(--light-color);
+        }
+
+        .hamburger {
+            display: none;
+            cursor: pointer;
+            font-size: 1.5rem;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--primary-color), #6c8fc7);
+            color: white;
+            padding: 8rem 2rem 4rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            animation: fadeInDown 1s ease;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            animation: fadeInUp 1s ease;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: var(--secondary-color);
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+            animation: fadeIn 1.5s ease;
+        }
+
+        .btn:hover {
+            background-color: #ff6a45;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .hero-animation {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: 0;
+            opacity: 0.1;
+        }
+
+        /* Features Section */
+        .features {
+            padding: 5rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .section-title h2 {
+            font-size: 2rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background-color: var(--secondary-color);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .feature-card {
+            background-color: white;
+            border-radius: 10px;
+            padding: 2rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s, box-shadow 0.3s;
+            text-align: center;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+        }
+
+        .feature-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--dark-color);
+        }
+
+        /* Courses Section */
+        .courses {
+            padding: 5rem 2rem;
+            background-color: var(--light-color);
+        }
+
+        .courses-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .courses-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .course-card {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s;
+        }
+
+        .course-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .course-img {
+            height: 200px;
+            overflow: hidden;
+        }
+
+        .course-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .course-card:hover .course-img img {
+            transform: scale(1.1);
+        }
+
+        .course-content {
+            padding: 1.5rem;
+        }
+
+        .course-content h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            color: var(--primary-color);
+        }
+
+        .course-content p {
+            margin-bottom: 1rem;
+            color: #666;
+        }
+
+        .course-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 1rem;
+            font-size: 0.9rem;
+        }
+
+        .course-level {
+            background-color: var(--light-color);
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-weight: 500;
+        }
+
+        .course-level.beginner {
+            background-color: #d4edda;
+            color: var(--success-color);
+        }
+
+        .course-level.intermediate {
+            background-color: #fff3cd;
+            color: #ffc107;
+        }
+
+        /* Testimonials */
+        .testimonials {
+            padding: 5rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .testimonial-slider {
+            position: relative;
+            overflow: hidden;
+            padding: 2rem 0;
+        }
+
+        .testimonial-slide {
+            background-color: white;
+            border-radius: 10px;
+            padding: 2rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            margin: 0 1rem;
+            text-align: center;
+            transition: all 0.3s;
+        }
+
+        .testimonial-slide:hover {
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .testimonial-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin: 0 auto 1rem;
+            border: 3px solid var(--secondary-color);
+        }
+
+        .testimonial-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .testimonial-quote {
+            font-style: italic;
+            margin-bottom: 1rem;
+            color: #555;
+        }
+
+        .testimonial-author {
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+
+        .testimonial-role {
+            font-size: 0.9rem;
+            color: #777;
+        }
+
+        /* Newsletter */
+        .newsletter {
+            padding: 4rem 2rem;
+            background: linear-gradient(135deg, var(--primary-color), #6c8fc7);
+            color: white;
+            text-align: center;
+        }
+
+        .newsletter-container {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .newsletter h2 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .newsletter p {
+            margin-bottom: 2rem;
+        }
+
+        .newsletter-form {
+            display: flex;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .newsletter-form input {
+            flex: 1;
+            padding: 0.8rem 1rem;
+            border: none;
+            border-radius: 30px 0 0 30px;
+            font-size: 1rem;
+        }
+
+        .newsletter-form button {
+            background-color: var(--secondary-color);
+            color: white;
+            border: none;
+            padding: 0 1.5rem;
+            border-radius: 0 30px 30px 0;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .newsletter-form button:hover {
+            background-color: #ff6a45;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--dark-color);
+            color: white;
+            padding: 4rem 2rem 2rem;
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .footer-col h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+
+        .footer-col h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 2px;
+            background-color: var(--secondary-color);
+        }
+
+        .footer-col p {
+            margin-bottom: 1rem;
+            color: #bbb;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-links a {
+            color: #bbb;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: var(--secondary-color);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: white;
+            transition: all 0.3s;
+        }
+
+        .social-links a:hover {
+            background-color: var(--secondary-color);
+            transform: translateY(-3px);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            margin-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #bbb;
+            font-size: 0.9rem;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 992px) {
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .navbar {
+                padding: 1rem;
+            }
+
+            .nav-links {
+                position: fixed;
+                top: 70px;
+                left: -100%;
+                width: 80%;
+                height: calc(100vh - 70px);
+                background-color: white;
+                flex-direction: column;
+                align-items: center;
+                padding: 2rem 0;
+                transition: left 0.3s;
+                box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+            }
+
+            .nav-links.active {
+                left: 0;
+            }
+
+            .nav-links li {
+                margin: 1rem 0;
+            }
+
+            .hamburger {
+                display: block;
+            }
+
+            .hero {
+                padding: 7rem 1rem 3rem;
+            }
+
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .newsletter-form {
+                flex-direction: column;
+            }
+
+            .newsletter-form input {
+                border-radius: 30px;
+                margin-bottom: 1rem;
+            }
+
+            .newsletter-form button {
+                border-radius: 30px;
+                padding: 0.8rem;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .hero h1 {
+                font-size: 1.5rem;
+            }
+
+            .section-title h2 {
+                font-size: 1.5rem;
+            }
+
+            .feature-card, .course-card {
+                padding: 1.5rem;
+            }
+
+            .footer-container {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <nav class="navbar">
+            <div class="logo">
+                <img src="logo.jpg" alt="Learn Animation Logo" id="logo-img" style="border-radius: 12px; opacity: 30px;">
+                <h1 id="logo-text">Learn Animation</h1>
+            </div>
+            <ul class="nav-links" id="nav-links">
+                <li><a href="#" id="nav-home">Home</a></li>
+                <li><a href="#" id="nav-courses">Courses</a></li>
+                <li><a href="#" id="nav-about">About</a></li>
+                <li><a href="#" id="nav-contact">Contact</a></li>
+                <li><a href="computer.html" id="nav-back">back</a></li>
+                <li>
+                    <div class="language-switcher">
+                        <button class="language-btn" id="language-btn">
+                            <span id="current-language">English</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div class="language-dropdown" id="language-dropdown">
+                            <a href="#" data-lang="en" id="lang-en">English</a>
+                            <a href="#" data-lang="rw" id="lang-rw">Kinyarwanda</a>
+                            <a href="#" data-lang="sw" id="lang-sw">Kiswahili</a>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+            <div class="hamburger" id="hamburger">
+                <i class="fas fa-bars"></i>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-animation">
+            <!-- Animation graphics would be implemented with JavaScript -->
+        </div>
+        <div class="hero-content">
+            <h1 id="hero-title">Master the Art of Animation</h1>
+            <p id="hero-subtitle">Learn from industry experts and create stunning animations with our comprehensive courses.</p>
+            <a href="#" class="btn" id="hero-btn">Start Learning Now</a>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features">
+        <div class="section-title">
+            <h2 id="features-title">Why Choose Us</h2>
+            <p id="features-subtitle">We provide the best learning experience for animation enthusiasts</p>
+        </div>
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-laptop-code"></i>
+                </div>
+                <h3 id="feature1-title">Expert Instructors</h3>
+                <p id="feature1-desc">Learn from professionals with years of experience in the animation industry.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-project-diagram"></i>
+                </div>
+                <h3 id="feature2-title">Hands-on Projects</h3>
+                <p id="feature2-desc">Apply what you learn through practical projects and build your portfolio.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-users"></i>
+                </div>
+                <h3 id="feature3-title">Community Support</h3>
+                <p id="feature3-desc">Join our vibrant community of learners and get feedback on your work.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Courses Section -->
+    <section class="courses">
+        <div class="courses-container">
+            <div class="section-title">
+                <h2 id="courses-title">Popular Courses</h2>
+                <p id="courses-subtitle">Start your animation journey with these beginner-friendly courses</p>
+            </div>
+            <div class="courses-grid">
+                <div class="course-card">
+                    <div class="course-img">
+                        <img src="2dni.jpeg" alt="2D Animation Course">
+                    </div>
+                    <div class="course-content">
+                        <h3 id="course1-title">2D Animation Fundamentals</h3>
+                        <p id="course1-desc">Learn the basics of 2D animation and create your first animated short.</p>
+                        <div class="course-meta">
+                            <span class="course-level beginner" id="course1-level">Beginner</span>
+                            <span id="course1-duration">4 Weeks</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="course-card">
+                    <div class="course-img">
+                        <img src="3dani.jpeg" alt="3D Animation Course">
+                    </div>
+                    <div class="course-content">
+                        <h3 id="course2-title">3D Character Animation</h3>
+                        <p id="course2-desc">Bring 3D characters to life with professional animation techniques.</p>
+                        <div class="course-meta">
+                            <span class="course-level intermediate" id="course2-level">Intermediate</span>
+                            <span id="course2-duration">6 Weeks</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="course-card">
+                    <div class="course-img">
+                        <img src="graphics.jpeg" alt="Motion Graphics Course">
+                    </div>
+                    <div class="course-content">
+                        <h3 id="course3-title">Motion Graphics Design</h3>
+                        <p id="course3-desc">Create stunning motion graphics for videos, ads, and presentations.</p>
+                        <div class="course-meta">
+                            <span class="course-level beginner" id="course3-level">Beginner</span>
+                            <span id="course3-duration">5 Weeks</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials">
+        <div class="section-title">
+            <h2 id="testimonials-title">What Our Students Say</h2>
+            <p id="testimonials-subtitle">Hear from our community of successful animators</p>
+        </div>
+        <div class="testimonial-slider">
+            <div class="testimonial-slide">
+                <div class="testimonial-avatar">
+                    <img src="nathpro.jpg" alt="Student 1">
+                </div>
+                <p class="testimonial-quote" id="testimonial1-text">"This platform transformed my animation skills. The courses are well-structured and the instructors are amazing!"</p>
+                <h4 class="testimonial-author" id="testimonial1-name">Alice Johnson</h4>
+                <p class="testimonial-role" id="testimonial1-role">2D Animator</p>
+            </div>
+        </div>
+    </section>
+
+    
+    <section class="newsletter">
+        <div class="newsletter-container">
+            <h2 id="newsletter-title">Stay Updated</h2>
+            <p id="newsletter-subtitle">Subscribe to our newsletter for the latest courses and animation tips</p>
+            <form class="newsletter-form">
+                <input type="email" placeholder="Your email address" id="newsletter-email" required>
+                <button type="submit" id="newsletter-btn">Subscribe</button>
+            </form>
+        </div>
+    </section>
+
+    
+    <footer>
+        <div class="footer-container">
+            <div class="footer-col">
+                <h3 id="footer-about-title">About Us</h3>
+                <p id="footer-about-text">Learn Animation is a platform dedicated to teaching animation skills to aspiring artists and professionals alike.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+            <div class="footer-col">
+                <h3 id="footer-links-title">Quick Links</h3>
+                <ul class="footer-links">
+                    <li><a href="#" id="footer-link1">Home</a></li>
+                    <li><a href="#" id="footer-link2">Courses</a></li>
+                    <li><a href="#" id="footer-link3">Pricing</a></li>
+                    <li><a href="#" id="footer-link4">Blog</a></li>
+                    <li><a href="#" id="footer-link5">Contact</a></li>
+                    
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h3 id="footer-contact-title">Contact Us</h3>
+                <p id="footer-address"><i class="fas fa-map-marker-alt"></i> Kigali, Rwanda</p>
+                <p id="footer-email"><i class="fas fa-envelope"></i> info@learnanimation.com</p>
+                <p id="footer-phone"><i class="fas fa-phone"></i> +250 788 123 456</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p id="footer-copyright">&copy; <span id="current-year">2023</span> Learn Animation. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Language content
+        const languageContent = {
+            en: {
+                // Navigation
+                logoText: "Learn Animation",
+                navHome: "Home",
+                navCourses: "Courses",
+                navAbout: "About",
+                navContact: "Contact",
+                currentLanguage: "English",
+                
+                // Hero
+                heroTitle: "Master the Art of Animation",
+                heroSubtitle: "Learn from industry experts and create stunning animations with our comprehensive courses.",
+                heroBtn: "Start Learning Now",
+                
+                // Features
+                featuresTitle: "Why Choose Us",
+                featuresSubtitle: "We provide the best learning experience for animation enthusiasts",
+                feature1Title: "Expert Instructors",
+                feature1Desc: "Learn from professionals with years of experience in the animation industry.",
+                feature2Title: "Hands-on Projects",
+                feature2Desc: "Apply what you learn through practical projects and build your portfolio.",
+                feature3Title: "Community Support",
+                feature3Desc: "Join our vibrant community of learners and get feedback on your work.",
+                
+                // Courses
+                coursesTitle: "Popular Courses",
+                coursesSubtitle: "Start your animation journey with these beginner-friendly courses",
+                course1Title: "2D Animation Fundamentals",
+                course1Desc: "Learn the basics of 2D animation and create your first animated short.",
+                course1Level: "Beginner",
+                course1Duration: "4 Weeks",
+                course2Title: "3D Character Animation",
+                course2Desc: "Bring 3D characters to life with professional animation techniques.",
+                course2Level: "Intermediate",
+                course2Duration: "6 Weeks",
+                course3Title: "Motion Graphics Design",
+                course3Desc: "Create stunning motion graphics for videos, ads, and presentations.",
+                course3Level: "Beginner",
+                course3Duration: "5 Weeks",
+                
+                // Testimonials
+                testimonialsTitle: "What Our Students Say",
+                testimonialsSubtitle: "Hear from our community of successful animators",
+                testimonial1Text: "\"This platform transformed my animation skills. The courses are well-structured and the instructors are amazing!\"",
+                testimonial1Name: "Alice Johnson",
+                testimonial1Role: "2D Animator",
+                
+                // Newsletter
+                newsletterTitle: "Stay Updated",
+                newsletterSubtitle: "Subscribe to our newsletter for the latest courses and animation tips",
+                newsletterEmail: "Your email address",
+                newsletterBtn: "Subscribe",
+                
+                // Footer
+                footerAboutTitle: "About Us",
+                footerAboutText: "Learn Animation is a platform dedicated to teaching animation skills to aspiring artists and professionals alike.",
+                footerLinksTitle: "Quick Links",
+                footerLink1: "Home",
+                footerLink2: "Courses",
+                footerLink3: "Pricing",
+                footerLink4: "Blog",
+                footerLink5: "Contact",
+                footerContactTitle: "Contact Us",
+                footerAddress: "Kigali, Rwanda",
+                footerEmail: "info@learnanimation.com",
+                footerPhone: "+250 788 123 456",
+                footerCopyright: "© 2023 Learn Animation. All Rights Reserved."
+            },
+            rw: {
+                // Navigation
+                logoText: "Kwiga Animation",
+                navHome: "Ahabanza",
+                navCourses: "Amasomo",
+                navAbout: "Ibyerekeye",
+                navContact: "Twandikire",
+                currentLanguage: "Kinyarwanda",
+                
+                // Hero
+                heroTitle: "Menya Ubuhanga bwa Animation",
+                heroSubtitle: "Kwiga kubantu bafite ubumenyi mu rwego rwa animation unashobore gukora animation nziza.",
+                heroBtn: "Tangira Kwiga Nonaha",
+                
+                // Features
+                featuresTitle: "Ibisabwa",
+                featuresSubtitle: "Tugutanga amasomo meza kuri animation",
+                feature1Title: "Abarezi bafite ubumenyi",
+                feature1Desc: "Kwiga kubantu bafite imyaka myinshi bakora animation.",
+                feature2Title: "Proje z'ingenzi",
+                feature2Desc: "Koresha ibyo wize mukora proje utangire portfolio.",
+                feature3Title: "Ubufasha bw'umuryango",
+                feature3Desc: "Winjire mu muryango w'abanyeshuri kugirango wakire inama.",
+                
+                // Courses
+                coursesTitle: "Amasomo y'akamaro",
+                coursesSubtitle: "Tangira urugendo rwawe rwa animation",
+                course1Title: "Amashuri y'ibanze ya 2D Animation",
+                course1Desc: "Menya iby'ingenzi kuri 2D animation ukore film y'ibanze.",
+                course1Level: "Umutangizi",
+                course1Duration: "Icyumweru 4",
+                course2Title: "3D Animation y'abantu",
+                course2Desc: "Kora animation nziza ya 3D ukoresheje uburyo bw'umunyaprofesore.",
+                course2Level: "Hagati",
+                course2Duration: "Icyumweru 6",
+                course3Title: "Gukora Motion Graphics",
+                course3Desc: "Kora motion graphics nziza kuri videwo, amatangazo n'ibindi.",
+                course3Level: "Umutangizi",
+                course3Duration: "Icyumweru 5",
+                
+                // Testimonials
+                testimonialsTitle: "Ibyo abanyeshuri bavuga",
+                testimonialsSubtitle: "Umva abanyeshuri bacu banezeje",
+                testimonial1Text: "\"Iyi platform yahinduye ubushobozi bwanjye bwa animation. Amasomo yarateguwe neza kandi abarezi ni baprofesore!\"",
+                testimonial1Name: "Alice Johnson",
+                testimonial1Role: "Umukinnyi wa 2D",
+                
+                
+                newsletterTitle: "Komeza kumenya amakuru",
+                newsletterSubtitle: "Iyandikishe kuri newsletter yacu kugirango wumenye amasomo mashya n'inama za animation",
+                newsletterEmail: "Email yawe",
+                newsletterBtn: "Iyandikishe",
+                
+                
+                footerAboutTitle: "Ibyerekeye twe",
+                footerAboutText: "Kwiga Animation ni platform itanga amasomo ya animation kubantu bose.",
+                footerLinksTitle: "Amahuza y'ibanze",
+                footerLink1: "Ahabanza",
+                footerLink2: "Amasomo",
+                footerLink3: "Igiciro",
+                footerLink4: "Blog",
+                footerLink5: "Twandikire",
+                footerContactTitle: "Twandikire",
+                footerAddress: "Kigali, Rwanda",
+                footerEmail: "nathansibomana367@gmail.com",
+                footerPhone: "+250 786562408",
+                footerCopyright: "2024-25 Kwiga Animation. Amategeko yose yarabitswe."
+            },
+            sw: {
+                
+                logoText: "Jifunze Animation",
+                navHome: "Nyumbani",
+                navCourses: "Kozi",
+                navAbout: "Kuhusu",
+                navContact: "Mawasiliano",
+                currentLanguage: "Kiswahili",
+                
+                
+                heroTitle: "Jifunze Sanaa ya Animation",
+                heroSubtitle: "Jifunze kutoka kwa wataalamu wa tasnia na unda animation nzuri kwa kutumia kozi zetu.",
+                heroBtn: "Anza Kujifunza Sasa",
+                
+                
+                featuresTitle: "Kwa Nini Kuchagua Sisi",
+                featuresSubtitle: "Tunatoa uzoefu bora wa kujifunza kwa wapenzi wa animation",
+                feature1Title: "Walimu wenye Ujuzi",
+                feature1Desc: "Jifunze kutoka kwa wataalamu wenye uzoefu wa miaka katika tasnia ya animation.",
+                feature2Title: "Miradi ya Vitendo",
+                feature2Desc: "Tumia ulichojifunza kupitia miradi ya vitendo na jenga portfolio yako.",
+                feature3Title: "Msaada wa Jamii",
+                feature3Desc: "Jiunge na jamii yetu ya wanafunzi na upate maoni kuhusu kazi yako.",
+                
+               
+                coursesTitle: "Kozi Maarufu",
+                coursesSubtitle: "Anza safari yako ya animation na kozi hizi rahisi kwa mwanzo",
+                course1Title: "Misingi ya 2D Animation",
+                course1Desc: "Jifunze misingi ya 2D animation na unda filamu fupi yako ya kwanza.",
+                course1Level: "Mwanzo",
+                course1Duration: "Wiki 4",
+                course2Title: "Animation ya Wahusika 3D",
+                course2Desc: "Fanya wahusika 3D waishi kwa kutumia mbinu za animation za kitaalamu.",
+                course2Level: "Kati",
+                course2Duration: "Wiki 6",
+                course3Title: "Ubunifu wa Motion Graphics",
+                course3Desc: "Tengeneza motion graphics nzuri kwa video, matangazo na maonyesho.",
+                course3Level: "Mwanzo",
+                course3Duration: "Wiki 5",
+                
+                
+                testimonialsTitle: "Wanafunzi Wetu Wanasema Nini",
+                testimonialsSubtitle: "Sikiliza kutoka kwa jamii yetu ya waanimation wafanikiwa",
+                testimonial1Text: "\"Jukwaa hili lilibadilisha ujuzi wangu wa animation. Kozi zimepangwa vizuri na walimu ni wa kipekee!\"",
+                testimonial1Name: "Alice Johnson",
+                testimonial1Role: "Mwanimation wa 2D",
+                
+                
+                newsletterTitle: "Endelea Kufahamiana",
+                newsletterSubtitle: "Jiandikishe kwa newsletter yetu kwa kozi mpya na vidokezo vya animation",
+                newsletterEmail: "Barua pepe yako",
+                newsletterBtn: "Jiandikishe",
+                
+                // Footer
+                footerAboutTitle: "Kuhusu Sisi",
+                footerAboutText: "Jifunze Animation ni jukwaa linalojitolea kufundisha ujuzi wa animation kwa wasanii na wataalamu.",
+                footerLinksTitle: "Viungo vya Haraka",
+                footerLink1: "Nyumbani",
+                footerLink2: "Kozi",
+                footerLink3: "Bei",
+                footerLink4: "Blogu",
+                footerLink5: "Mawasiliano",
+                footerContactTitle: "Wasiliana Nasi",
+                footerAddress: "Kigali, Rwanda",
+                footerEmail: "info@learnanimation.com",
+                footerPhone: "+250 788 123 456",
+                footerCopyright: "© 2023 Jifunze Animation. Haki zote zimehifadhiwa."
+            }
+        };
+
+       
+        const languageBtn = document.getElementById('language-btn');
+        const languageDropdown = document.getElementById('language-dropdown');
+        const currentLanguageText = document.getElementById('current-language');
+        const hamburger = document.getElementById('hamburger');
+        const navLinks = document.getElementById('nav-links');
+        
+       
+        let currentLanguage = 'en';
+        
+       
+        languageBtn.addEventListener('click', () => {
+            languageDropdown.classList.toggle('show');
+        });
+        
+        
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('.language-switcher')) {
+                languageDropdown.classList.remove('show');
+            }
+        });
+        
+        // Change language
+        document.querySelectorAll('.language-dropdown a').forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const lang = e.target.getAttribute('data-lang');
+                currentLanguage = lang;
+                currentLanguageText.textContent = languageContent[lang].currentLanguage;
+                updateContent(lang);
+                languageDropdown.classList.remove('show');
+            });
+        });
+        
+        // Toggle mobile menu
+        hamburger.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            hamburger.innerHTML = navLinks.classList.contains('active') 
+                ? '<i class="fas fa-times"></i>' 
+                : '<i class="fas fa-bars"></i>';
+        });
+        
+        // Update all content based on language
+        function updateContent(lang) {
+            const content = languageContent[lang];
+            
+            // Navigation
+            document.getElementById('logo-text').textContent = content.logoText;
+            document.getElementById('nav-home').textContent = content.navHome;
+            document.getElementById('nav-courses').textContent = content.navCourses;
+            document.getElementById('nav-about').textContent = content.navAbout;
+            document.getElementById('nav-contact').textContent = content.navContact;
+            
+            // Hero
+            document.getElementById('hero-title').textContent = content.heroTitle;
+            document.getElementById('hero-subtitle').textContent = content.heroSubtitle;
+            document.getElementById('hero-btn').textContent = content.heroBtn;
+            
+            // Features
+            document.getElementById('features-title').textContent = content.featuresTitle;
+            document.getElementById('features-subtitle').textContent = content.featuresSubtitle;
+            document.getElementById('feature1-title').textContent = content.feature1Title;
+            document.getElementById('feature1-desc').textContent = content.feature1Desc;
+            document.getElementById('feature2-title').textContent = content.feature2Title;
+            document.getElementById('feature2-desc').textContent = content.feature2Desc;
+            document.getElementById('feature3-title').textContent = content.feature3Title;
+            document.getElementById('feature3-desc').textContent = content.feature3Desc;
+            
+            // Courses
+            document.getElementById('courses-title').textContent = content.coursesTitle;
+            document.getElementById('courses-subtitle').textContent = content.coursesSubtitle;
+            document.getElementById('course1-title').textContent = content.course1Title;
+            document.getElementById('course1-desc').textContent = content.course1Desc;
+            document.getElementById('course1-level').textContent = content.course1Level;
+            document.getElementById('course1-duration').textContent = content.course1Duration;
+            document.getElementById('course2-title').textContent = content.course2Title;
+            document.getElementById('course2-desc').textContent = content.course2Desc;
+            document.getElementById('course2-level').textContent = content.course2Level;
+            document.getElementById('course2-duration').textContent = content.course2Duration;
+            document.getElementById('course3-title').textContent = content.course3Title;
+            document.getElementById('course3-desc').textContent = content.course3Desc;
+            document.getElementById('course3-level').textContent = content.course3Level;
+            document.getElementById('course3-duration').textContent = content.course3Duration;
+            
+            // Testimonials
+            document.getElementById('testimonials-title').textContent = content.testimonialsTitle;
+            document.getElementById('testimonials-subtitle').textContent = content.testimonialsSubtitle;
+            document.getElementById('testimonial1-text').textContent = content.testimonial1Text;
+            document.getElementById('testimonial1-name').textContent = content.testimonial1Name;
+            document.getElementById('testimonial1-role').textContent = content.testimonial1Role;
+            
+            // Newsletter
+            document.getElementById('newsletter-title').textContent = content.newsletterTitle;
+            document.getElementById('newsletter-subtitle').textContent = content.newsletterSubtitle;
+            document.getElementById('newsletter-email').placeholder = content.newsletterEmail;
+            document.getElementById('newsletter-btn').textContent = content.newsletterBtn;
+            
+            // Footer
+            document.getElementById('footer-about-title').textContent = content.footerAboutTitle;
+            document.getElementById('footer-about-text').textContent = content.footerAboutText;
+            document.getElementById('footer-links-title').textContent = content.footerLinksTitle;
+            document.getElementById('footer-link1').textContent = content.footerLink1;
+            document.getElementById('footer-link2').textContent = content.footerLink2;
+            document.getElementById('footer-link3').textContent = content.footerLink3;
+            document.getElementById('footer-link4').textContent = content.footerLink4;
+            document.getElementById('footer-link5').textContent = content.footerLink5;
+            document.getElementById('footer-contact-title').textContent = content.footerContactTitle;
+            document.getElementById('footer-address').textContent = content.footerAddress;
+            document.getElementById('footer-email').textContent = content.footerEmail;
+            document.getElementById('footer-phone').textContent = content.footerPhone;
+            document.getElementById('footer-copyright').textContent = content.footerCopyright;
+        }
+        
+        
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+        
+        
+        const heroTitle = document.getElementById('hero-title');
+        const heroSubtitle = document.getElementById('hero-subtitle');
+        const heroBtn = document.getElementById('hero-btn');
+        
+        heroTitle.style.animation = 'fadeInDown 1s ease';
+        heroSubtitle.style.animation = 'fadeInUp 1s ease';
+        heroBtn.style.animation = 'fadeIn 1.5s ease';
+        
+        
+        const featureCards = document.querySelectorAll('.feature-card');
+        
+        const animateOnScroll = () => {
+            featureCards.forEach((card, index) => {
+                const cardPosition = card.getBoundingClientRect().top;
+                const screenPosition = window.innerHeight / 1.3;
+                
+                if (cardPosition < screenPosition) {
+                    card.style.animation = `fadeInUp 0.5s ease forwards ${index * 0.2}s`;
+                }
+            });
+        };
+        
+        window.addEventListener('scroll', animateOnScroll);
+        animateOnScroll();  
+    </script>
+</body>
+</html>
