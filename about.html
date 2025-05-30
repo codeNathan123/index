@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us ulk gisenyi camps University</title>
+    <link rel="stylesheet" href="bootstrap-5.0.2-dist/bootstrap-5.0.2-dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .content {
+            padding: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            opacity: 1;
+        }
+        
+        .about-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .about-header h2 {
+            font-size: 2.5rem;
+            color: #1a2a6c;
+            margin-bottom: 1rem;
+            animation: slideInDown 1s ease-out;
+        }
+        
+        .about-header p {
+            font-size: 1.2rem;
+            color: #555;
+            max-width: 800px;
+            margin: 0 auto;
+            animation: fadeIn 1s ease-out 0.3s forwards;
+            opacity: 1;
+        }
+        
+        .about-section {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            margin-bottom: 3rem;
+            align-items: center;
+        }
+        
+        .about-text {
+            flex: 1;
+            min-width: 300px;
+            animation: slideInLeft 1s ease-out 0.3s forwards;
+            opacity: 1;
+        }
+        
+        .about-image {
+            flex: 1;
+            min-width: 300px;
+            animation: slideInRight 1s ease-out 0.3s forwards;
+            opacity: 1;
+        }
+        
+        .about-image img {
+            width: 100%;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        .mission-vision {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+        
+        .card {
+            background: white;
+            border-radius: 8px;
+            padding: 2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .card h3 {
+            color: #1a2a6c;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+        }
+        
+        .card h3 i {
+            margin-right: 0.5rem;
+            font-size: 1.5rem;
+        }
+        
+        .leadership {
+            margin-top: 3rem;
+        }
+        
+        .leaders {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .leader-card {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+        
+        .leader-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .leader-card img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+        }
+        
+        .leader-info {
+            padding: 1.5rem;
+        }
+        
+        .leader-info h4 {
+            color: #1a2a6c;
+            margin-bottom: 0.5rem;
+        }
+        
+        .leader-info p {
+            color: #777;
+            font-style: italic;
+        }
+        
+        @keyframes slideInLeft {
+            from { transform: translateX(-50px); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+        
+        @keyframes slideInRight {
+            from { transform: translateX(50px); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+        
+        @keyframes slideInDown {
+            from { transform: translateY(-50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @media (max-width: 768px) {
+            .about-header h2 {
+                font-size: 2rem;
+            }
+            
+            .about-header p {
+                font-size: 1rem;
+            }
+            
+            .about-section {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="content">
+        <div class="about-header">
+            <h2>About ulk gisenyi University</h2>
+            <p>Founded in 1950, Global University has been a beacon of knowledge, innovation, and leadership for over 70 years.</p>
+        </div>
+        
+        <section class="about-section">
+            <div class="about-text">
+                <h3>Our History</h3>
+                <p>gisenyi University was established with a vision to create a world-class institution that would bridge the gap between academia and industry. What began as a small college with just 200 students has now grown into a prestigious university with over 20,000 students from across the globe.</p>
+                <p>Throughout our history, we've remained committed to our founding principles of academic rigor, diversity, and community engagement. Our alumni network includes Nobel laureates, CEOs, and leaders in various fields who are making a difference worldwide.</p>
+            </div>
+            <div class="about-image">
+                <img src="gisenyi.jpeg" alt="University campus">
+            </div>
+        </section>
+        
+        <div class="mission-vision">
+            <div class="card">
+                <h3><i class="fas fa-bullseye"></i> Our Mission</h3>
+                <p>To empower students through transformative education, foster innovation through research, and serve society through knowledge and leadership.</p>
+            </div>
+            <div class="card">
+                <h3><i class="fas fa-eye"></i> Our Vision</h3>
+                <p>To be a globally recognized institution that shapes the future through excellence in teaching, research, and community engagement.</p>
+            </div>
+            <div class="card">
+                <h3><i class="fas fa-heart"></i> Our Values</h3>
+                <p>Integrity, Excellence, Diversity, Innovation, and Social Responsibility form the core of everything we do at Global University.</p>
+            </div>
+        </div>
+        
+        <section class="leadership">
+            <h2>University Leadership</h2>
+            <div class="leaders">
+                <div class="leader-card">
+                    <img src="leader.jpg" alt="President">
+                    <div class="leader-info">
+                        <h4>Dr. rwigamba</h4>
+                        <p>University President</p>
+                    </div>
+                </div>
+                <div class="leader-card">
+                    <img src="other.jpeg" alt="Provost">
+                    <div class="leader-info">
+                        <h4>Dr. maricel</h4>
+                        <p>Provost & Chief Academic Officer</p>
+                    </div>
+                </div>
+                <div class="leader-card">
+                    <img src="dean.jpeg" alt="Dean">
+                    <div class="leader-info">
+                        <h4>Dr. shalire</h4>
+                        <p>Dean of Students</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script src="bootstrap-5.0.2-dist/bootstrap-5.0.2-dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

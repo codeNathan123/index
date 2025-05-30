@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home - Global University</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css">
+    <style>
+        :root {
+            --primary-color: #1a2a6c;
+            --secondary-color: #0f1a4b;
+            --text-color: #333;
+            --light-bg: #f8f9fa;
+            --white: #ffffff;
+            --transition: all 0.3s ease;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--light-bg);
+        }
+        
+        .content {
+            padding: 1rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url("selebatr.jpeg") no-repeat center center;
+            background-size: cover;
+            min-height: 400px;
+            height: 70vh;
+            max-height: 800px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            text-align: center;
+            position: relative;
+            margin-bottom: 2rem;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            padding: 2rem;
+            max-width: 800px;
+            width: 90%;
+        }
+        
+        .hero h2 {
+            font-size: clamp(2rem, 5vw, 3rem);
+            margin-bottom: 1.5rem;
+            font-weight: 700;
+            line-height: 1.2;
+        }
+        
+        .hero p {
+            font-size: clamp(1rem, 2vw, 1.3rem);
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: var(--primary-color);
+            color: var(--white);
+            padding: 0.8rem 2rem;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+        
+        .btn:hover {
+            background-color: var(--secondary-color);
+            transform: translateY(-3px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+        
+        .highlights {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+        
+        .highlight-card {
+            background: var(--white);
+            border-radius: 10px;
+            padding: 2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            transition: var(--transition);
+            text-align: center;
+        }
+        
+        .highlight-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .highlight-card h3 {
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+            font-size: 1.5rem;
+        }
+        
+        .highlight-card p {
+            color: var(--text-color);
+            opacity: 0.8;
+        }
+        
+        .section-title {
+            color: var(--primary-color);
+            margin-bottom: 2rem;
+            font-size: 2rem;
+            font-weight: 700;
+            text-align: center;
+            position: relative;
+        }
+        
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background: var(--primary-color);
+            margin: 1rem auto;
+            border-radius: 2px;
+        }
+        
+        .news-section {
+            margin: 4rem 0;
+        }
+        
+        .news-item {
+            display: flex;
+            margin-bottom: 2rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid #eee;
+            align-items: flex-start;
+            background: var(--white);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            transition: var(--transition);
+        }
+        
+        .news-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .news-item img {
+            width: 200px;
+            height: 150px;
+            object-fit: cover;
+            margin-right: 2rem;
+            flex-shrink: 0;
+        }
+        
+        .news-content {
+            padding: 1.5rem 1.5rem 1.5rem 0;
+        }
+        
+        .news-item h3 {
+            color: var(--primary-color);
+            margin-bottom: 0.8rem;
+            font-size: 1.3rem;
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 992px) {
+            .hero {
+                height: 60vh;
+            }
+            
+            .news-item img {
+                width: 180px;
+                height: 120px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .content {
+                padding: 0.5rem;
+            }
+            
+            .hero {
+                height: 50vh;
+                min-height: 350px;
+                border-radius: 0;
+                margin-bottom: 1rem;
+            }
+            
+            .hero-content {
+                padding: 1rem;
+            }
+            
+            .highlight-card {
+                padding: 1.5rem;
+            }
+            
+            .news-item {
+                flex-direction: column;
+            }
+            
+            .news-item img {
+                width: 100%;
+                height: 200px;
+                margin-right: 0;
+                margin-bottom: 1rem;
+            }
+            
+            .news-content {
+                padding: 0 1.5rem 1.5rem;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .hero {
+                height: 400px;
+            }
+            
+            .hero h2 {
+                font-size: 2rem;
+            }
+            
+            .highlights {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+            
+            .section-title {
+                font-size: 1.7rem;
+            }
+            
+            .news-item img {
+                height: 160px;
+            }
+        }
+        
+        /* Animation classes */
+        .animate-in {
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+        
+        .delay-1 {
+            animation-delay: 0.2s;
+        }
+        
+        .delay-2 {
+            animation-delay: 0.4s;
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="content">
+        <section class="hero">
+            <div class="hero-content">
+                <h2 class="animate-in">Welcome to ULK Campus Gisenyi University</h2> 
+                <p class="animate-in delay-1">A premier institution dedicated to academic excellence, innovation, and student success.</p>
+                <a href="adimision.html" class="btn animate-in delay-2">Apply Now</a> 
+            </div>
+        </section>
+        
+        <section>
+            <h2 class="section-title animate-in">Why Choose Our University</h2>
+            <div class="highlights">
+                <div class="highlight-card animate-in delay-1">
+                    <h3>World-Class Faculty</h3>
+                    <p>Learn from distinguished professors and industry experts committed to your success.</p>
+                </div>
+                <div class="highlight-card animate-in delay-1">
+                    <h3>Cutting-Edge Research</h3>
+                    <p>Participate in groundbreaking research projects with real-world impact.</p>
+                </div>
+                <div class="highlight-card animate-in delay-1">
+                    <h3>Vibrant Campus Life</h3>
+                    <p>Join over 100 student organizations and enjoy our state-of-the-art facilities.</p>
+                </div>
+            </div>
+        </section>
+        
+        <section class="news-section">
+            <h2 class="section-title animate-in">Campus News</h2>
+            <div class="news-item animate-in delay-1">
+                <img src="class.jpeg" alt="Research award">
+                <div class="news-content">
+                    <h3>University Research Team Wins National Award</h3>
+                    <p>Our computer science department received recognition for their work in artificial intelligence at the National Tech Innovation Awards ceremony last week.</p>
+                </div>
+            </div>
+            <div class="news-item animate-in delay-2">
+                <img src="sod.jpeg" alt="New building">
+                <div class="news-content">
+                    <h3>New Science Complex Opening Fall 2025</h3>
+                    <p>The $50 million facility will house advanced laboratories and collaborative learning spaces, featuring the latest technology for STEM education.</p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            const animateElements = document.querySelectorAll('.animate-in');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = 1;
+                    }
+                });
+            }, {
+                threshold: 0.1
+            });
+            
+            animateElements.forEach(element => {
+                element.style.opacity = 0;
+                observer.observe(element);
+            });
+        });
+    </script>
+</body>
+</html>

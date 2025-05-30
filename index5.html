@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ULK Gisenyi Campus</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            overflow-x: hidden;
+        }
+        
+        .frame-container {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d);
+            color: white;
+            padding: 1.5rem 1rem;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            animation: gradientBG 15s ease infinite;
+            background-size: 400% 400%;
+            position: relative;
+        }
+        
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        nav {
+            background-color: #333;
+            display: flex;
+            justify-content: center;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            width: 100%;
+            max-width: 1200px;
+            margin: 0;
+            padding: 0;
+        }
+        
+        nav li {
+            flex: 1;
+            text-align: center;
+            position: relative;
+        }
+        
+        nav a {
+            color: white;
+            text-decoration: none;
+            padding: 1rem 0.5rem;
+            display: block;
+            transition: all 0.3s ease;
+            font-size: 0.95rem;
+            white-space: nowrap;
+        }
+        
+        nav a:hover {
+            background-color: #555;
+            transform: translateY(-3px);
+        }
+        
+        .active {
+            background-color: #1a2a6c;
+            font-weight: bold;
+        }
+        
+        .logout-btn {
+            background-color: #d9534f;
+        }
+        
+        .logout-btn:hover {
+            background-color: #c9302c;
+        }
+        
+        main {
+            flex: 1;
+            overflow: auto;
+            padding: 0;
+        }
+        
+        iframe {
+            width: 100%;
+            height: 100%;
+            min-height: calc(100vh - 200px);
+            border: none;
+            display: block;
+        }
+        
+        footer {
+            background-color: #222;
+            color: white;
+            text-align: center;
+            padding: 1rem;
+            font-size: 0.9rem;
+        }
+        
+        /* Language switcher styles */
+        .language-switcher {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            z-index: 100;
+        }
+        
+        .language-btn {
+            background-color: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 4px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            font-size: 0.85rem;
+        }
+        
+        .language-btn:hover {
+            background-color: rgba(255, 255, 255, 0.3);
+        }
+        
+        .language-btn img {
+            width: 20px;
+            margin-right: 5px;
+        }
+        
+        .language-dropdown {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background-color: white;
+            border-radius: 4px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            display: none;
+            min-width: 120px;
+            z-index: 1000;
+        }
+        
+        .language-dropdown.show {
+            display: block;
+        }
+        
+        .language-option {
+            padding: 8px 12px;
+            color: #333;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            transition: background-color 0.2s;
+            font-size: 0.85rem;
+        }
+        
+        .language-option:hover {
+            background-color: #f0f0f0;
+        }
+        
+        .language-option img {
+            width: 20px;
+            margin-right: 8px;
+        }
+        
+        /* Mobile styles */
+        @media (max-width: 992px) {
+            nav a {
+                padding: 0.8rem 0.3rem;
+                font-size: 0.85rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            header {
+                padding: 1rem 0.5rem 1.5rem;
+            }
+            
+            header h1 {
+                font-size: 1.5rem;
+                margin-top: 0.5rem;
+            }
+            
+            header p {
+                font-size: 0.9rem;
+            }
+            
+            nav ul {
+                flex-wrap: wrap;
+            }
+            
+            nav li {
+                flex: 1 0 50%;
+                border-bottom: 1px solid #555;
+            }
+            
+            .language-switcher {
+                position: relative;
+                top: auto;
+                right: auto;
+                display: inline-block;
+                margin-top: 10px;
+            }
+            
+            .language-dropdown {
+                left: 50%;
+                right: auto;
+                transform: translateX(-50%);
+                width: max-content;
+            }
+            
+            iframe {
+                min-height: calc(100vh - 250px);
+            }
+        }
+        
+        @media (max-width: 480px) {
+            nav li {
+                flex: 1 0 100%;
+            }
+            
+            header h1 {
+                font-size: 1.3rem;
+            }
+            
+            header p {
+                font-size: 0.8rem;
+            }
+            
+            footer p {
+                font-size: 0.8rem;
+            }
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .content-animate {
+            animation: fadeIn 0.5s ease-out forwards;
+        }
+        
+        /* Hamburger menu for mobile */
+        .hamburger {
+            display: none;
+            cursor: pointer;
+            padding: 10px;
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            z-index: 100;
+        }
+        
+        .hamburger span {
+            display: block;
+            width: 25px;
+            height: 3px;
+            background-color: white;
+            margin: 5px 0;
+            transition: all 0.3s ease;
+        }
+        
+        @media (max-width: 768px) {
+            .hamburger {
+                display: block;
+            }
+            
+            nav ul {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 60px;
+                left: 0;
+                width: 100%;
+                background-color: #333;
+                z-index: 999;
+            }
+            
+            nav ul.show {
+                display: flex;
+            }
+            
+            nav li {
+                flex: 1;
+                border-bottom: 1px solid #555;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="frame-container">
+        <header>
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <h1>ULK Gisenyi Campus</h1>
+            <p>Excellence in Education Since 2016</p>
+            
+            <div class="language-switcher">
+                <button class="language-btn" id="languageBtn">
+                    <img src="https://flagcdn.com/w20/gb.png" alt="English" id="currentFlag">
+                    <span id="currentLanguage">English</span>
+                </button>
+                <div class="language-dropdown" id="languageDropdown">
+                    <a href="#" class="language-option" data-lang="en">
+                        <img src="https://flagcdn.com/w20/gb.png" alt="English">
+                        English
+                    </a>
+                    <a href="#" class="language-option" data-lang="sw">
+                        <img src="https://flagcdn.com/w20/ke.png" alt="Kiswahili">
+                        Kiswahili
+                    </a>
+                    <a href="#" class="language-option" data-lang="ar">
+                        <img src="https://flagcdn.com/w20/sa.png" alt="Arabic">
+                        العربية
+                    </a>
+                    <a href="#" class="language-option" data-lang="fr">
+                        <img src="https://flagcdn.com/w20/fr.png" alt="French">
+                        Français
+                    </a>
+                    <a href="#" class="language-option" data-lang="rw">
+                        <img src="https://flagcdn.com/w20/rw.png" alt="Kinyarwanda">
+                        Kinyarwanda
+                    </a>
+                </div>
+            </div>
+        </header>
+        
+        <nav>
+            <ul id="navMenu">
+                <li><a href="home.html" target="content" class="active" data-i18n="home">Home</a></li>
+                <li><a href="about.html" target="content" data-i18n="about">About Us</a></li>
+                <li><a href="course.html" target="content" data-i18n="courses">Courses Offered</a></li>
+                <li><a href="adimision.html" target="content" data-i18n="admissions">Admissions</a></li>
+                <li><a href="#" id="logout" class="logout-btn" data-i18n="logout">Logout</a></li>
+            </ul>
+        </nav>
+        
+        <main>
+            <iframe name="content" src="home.html" title="Main Content"></iframe>
+        </main>
+        
+        <footer>
+            <p data-i18n="contact">Contact: nathansibomana367@gmail.com | Phone: +250 786562408</p>
+        </footer>
+    </div>
+    
+    <script>
+        const translations = {
+            en: {
+                home: "Home",
+                about: "About Us",
+                courses: "Courses Offered",
+                admissions: "Admissions",
+                logout: "Logout",
+                contact: "Contact: nathansibomana367@gmail.com | Phone: +250 786562408",
+                campusName: "ULK Gisenyi Campus",
+                slogan: "Excellence in Education Since 2016"
+            },
+            sw: {
+                home: "Nyumbani",
+                about: "Kuhusu Sisi",
+                courses: "Kozi Zinazotolewa",
+                admissions: "Uandikishaji",
+                logout: "Toka",
+                contact: "Mawasiliano: nathansibomana367@gmail.com | Simu: +250 786562408",
+                campusName: "Kampasi ya ULK Gisenyi",
+                slogan: "Ubora katika Elimu Tangu 2016"
+            },
+            ar: {
+                home: "الصفحة الرئيسية",
+                about: "معلومات عنا",
+                courses: "الدورات المقدمة",
+                admissions: "القبول",
+                logout: "تسجيل خروج",
+                contact: "للتواصل: nathansibomana367@gmail.com | الهاتف: +250 786562408",
+                campusName: "حرم جامعة جيسيني",
+                slogan: "التميز في التعليم منذ 2016"
+            },
+            fr: {
+                home: "Accueil",
+                about: "À propos de nous",
+                courses: "Cours proposés",
+                admissions: "Admissions",
+                logout: "Déconnexion",
+                contact: "Contact: nathansibomana367@gmail.com | Téléphone: +250 786562408",
+                campusName: "Campus ULK Gisenyi",
+                slogan: "L'excellence dans l'éducation depuis 2016"
+            },
+            rw: {
+                home: "Ahabanza",
+                about: "Ibyerekeye twe",
+                courses: "Inzego zigenzurwa",
+                admissions: "Kwiyandikisha",
+                logout: "Gusohoka",
+                contact: "Twandikire: nathansibomana367@gmail.com | Telefoni: +250 786562408",
+                campusName: "Isomero ry'ikigo ULK Gisenyi",
+                slogan: "Ubuhanga mu by'ishuri kuva 2016"
+            }
+        };
+
+        
+        const languageFlags = {
+            en: "https://flagcdn.com/w20/gb.png",
+            sw: "https://flagcdn.com/w20/ke.png",
+            ar: "https://flagcdn.com/w20/sa.png",
+            fr: "https://flagcdn.com/w20/fr.png",
+            rw: "https://flagcdn.com/w20/rw.png"
+        };
+
+        // Language names for display
+        const languageNames = {
+            en: "English",
+            sw: "Kiswahili",
+            ar: "العربية",
+            fr: "Français",
+            rw: "Kinyarwanda"
+        };
+
+        let currentLanguage = 'en';
+
+        // DOM elements
+        const languageBtn = document.getElementById('languageBtn');
+        const currentFlag = document.getElementById('currentFlag');
+        const currentLanguageText = document.getElementById('currentLanguage');
+        const languageDropdown = document.getElementById('languageDropdown');
+        const languageOptions = document.querySelectorAll('.language-option');
+        const hamburger = document.getElementById('hamburger');
+        const navMenu = document.getElementById('navMenu');
+
+        
+        hamburger.addEventListener('click', function() {
+            this.classList.toggle('active');
+            navMenu.classList.toggle('show');
+            
+            
+            const spans = this.querySelectorAll('span');
+            if (navMenu.classList.contains('show')) {
+                spans[0].style.transform = 'rotate(45deg) translate(5px, 5px)';
+                spans[1].style.opacity = '0';
+                spans[2].style.transform = 'rotate(-45deg) translate(5px, -5px)';
+            } else {
+                spans[0].style.transform = 'none';
+                spans[1].style.opacity = '1';
+                spans[2].style.transform = 'none';
+            }
+        });
+
+        
+        document.querySelectorAll('nav a').forEach(link => {
+            link.addEventListener('click', function() {
+                if (window.innerWidth <= 768) {
+                    navMenu.classList.remove('show');
+                    hamburger.classList.remove('active');
+                    const spans = hamburger.querySelectorAll('span');
+                    spans[0].style.transform = 'none';
+                    spans[1].style.opacity = '1';
+                    spans[2].style.transform = 'none';
+                }
+            });
+        });
+
+        // Language switcher functionality
+        languageBtn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            languageDropdown.classList.toggle('show');
+        });
+
+        // Close dropdown when clicking outside
+        document.addEventListener('click', function() {
+            languageDropdown.classList.remove('show');
+        });
+
+        // Change language
+        languageOptions.forEach(option => {
+            option.addEventListener('click', function(e) {
+                e.preventDefault();
+                const lang = this.getAttribute('data-lang');
+                changeLanguage(lang);
+                languageDropdown.classList.remove('show');
+            });
+        });
+
+        function changeLanguage(lang) {
+            currentLanguage = lang;
+            
+            // Update header text
+            document.querySelector('h1').textContent = translations[lang].campusName;
+            document.querySelector('header p').textContent = translations[lang].slogan;
+            
+            // Update language switcher
+            currentFlag.src = languageFlags[lang];
+            currentLanguageText.textContent = languageNames[lang];
+            
+            // Update all elements with data-i18n attribute
+            document.querySelectorAll('[data-i18n]').forEach(element => {
+                const key = element.getAttribute('data-i18n');
+                if (translations[lang][key]) {
+                    element.textContent = translations[lang][key];
+                }
+            });
+            
+            // Save preference
+            localStorage.setItem('preferredLanguage', lang);
+        }
+
+        // Load saved language preference
+        const savedLanguage = localStorage.getItem('preferredLanguage');
+        if (savedLanguage && translations[savedLanguage]) {
+            changeLanguage(savedLanguage);
+        }
+
+        
+        document.querySelectorAll('nav a').forEach(link => {
+            link.addEventListener('click', function() {
+                document.querySelectorAll('nav a').forEach(a => a.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+        
+        
+        const iframe = document.querySelector('iframe');
+        iframe.addEventListener('load', function() {
+            const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
+            const content = iframeDoc.querySelector('.content');
+            if (content) {
+                content.classList.add('content-animate');
+            }
+        });
+        
+        
+        document.getElementById('logout').addEventListener('click', function(e) {
+            e.preventDefault();
+            if (confirm(translations[currentLanguage].logout + '?')) {
+                alert('You have been logged out successfully.');
+                window.location.href = 'login.html';
+            }
+        });
+
+        
+        function adjustIframeHeight() {
+            const headerHeight = document.querySelector('header').offsetHeight;
+            const navHeight = document.querySelector('nav').offsetHeight;
+            const footerHeight = document.querySelector('footer').offsetHeight;
+            const windowHeight = window.innerHeight;
+            
+            const iframe = document.querySelector('iframe');
+            iframe.style.height = (windowHeight - headerHeight - navHeight - footerHeight) + 'px';
+        }
+
+        
+        window.addEventListener('load', adjustIframeHeight);
+        window.addEventListener('resize', adjustIframeHeight);
+    </script>
+</body>
+</html>

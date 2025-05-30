@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Animated Registration Form</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            padding: 20px;
+        }
+
+        .form-container {
+            position: relative;
+            width: 100%;
+            max-width: 800px;
+            background: #fff;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            margin: 20px;
+        }
+
+        .form-container::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, 
+                #ff3366, #ff3366, #ff9933, #ff9933, 
+                #33cc33, #33cc33, #3399ff, #3399ff, 
+                #cc33ff, #cc33ff, transparent);
+            background-size: 200% 200%;
+            animation: borderAnimation 8s linear infinite;
+            z-index: -1;
+            transform: rotate(0deg);
+        }
+
+        @keyframes borderAnimation {
+            0% {
+                transform: rotate(0deg);
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                transform: rotate(360deg);
+                background-position: 0% 50%;
+            }
+        }
+
+        .form-container form {
+            background: #fff;
+            padding: 30px;
+            border-radius: 8px;
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #333;
+            font-size: 28px;
+        }
+
+        .form-row {
+            display: flex;
+            flex-wrap: wrap;
+            margin: 0 -15px;
+        }
+
+        .form-group {
+            width: 100%;
+            padding: 0 15px;
+            margin-bottom: 20px;
+        }
+
+        @media (min-width: 768px) {
+            .form-group.half {
+                width: 50%;
+            }
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #555;
+            font-weight: 500;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+            transition: all 0.3s;
+        }
+
+        input:focus, select:focus {
+            border-color: #3399ff;
+            outline: none;
+            box-shadow: 0 0 5px rgba(51, 153, 255, 0.5);
+        }
+
+        .photo-upload {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .photo-preview {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background-color: #f0f0f0;
+            margin-bottom: 15px;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border: 3px solid #ddd;
+        }
+
+        .photo-preview img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: none;
+        }
+
+        .photo-preview i {
+            font-size: 40px;
+            color: #999;
+        }
+
+        .upload-btn {
+            background: #3399ff;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-align: center;
+            display: inline-block;
+            border: none;
+            font-size: 16px;
+        }
+
+        .upload-btn:hover {
+            background: #2d89e5;
+        }
+
+        #photo-upload {
+            display: none;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(to right, #ff3366, #ff9933);
+            border: none;
+            color: white;
+            font-size: 18px;
+            font-weight: 600;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 10px;
+        }
+
+        .submit-btn:hover {
+            background: linear-gradient(to right, #e62e5c, #e68a2e);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 767px) {
+            .form-container {
+                padding: 15px;
+            }
+            
+            .form-container form {
+                padding: 20px;
+            }
+            
+            h2 {
+                font-size: 24px;
+                margin-bottom: 20px;
+            }
+            
+            input, select {
+                padding: 10px 12px;
+                font-size: 14px;
+            }
+            
+            .photo-preview {
+                width: 100px;
+                height: 100px;
+            }
+            
+            .upload-btn {
+                padding: 8px 16px;
+                font-size: 14px;
+            }
+            
+            .submit-btn {
+                padding: 12px;
+                font-size: 16px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .form-container {
+                padding: 10px;
+                margin: 10px;
+            }
+            
+            .form-container form {
+                padding: 15px;
+            }
+            
+            h2 {
+                font-size: 22px;
+                margin-bottom: 15px;
+            }
+            
+            .form-row {
+                margin: 0 -10px;
+            }
+            
+            .form-group {
+                padding: 0 10px;
+                margin-bottom: 15px;
+            }
+            
+            .photo-preview {
+                width: 80px;
+                height: 80px;
+            }
+            
+            .photo-preview i {
+                font-size: 30px;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <div class="form-container">
+        <form id="registrationForm" action="index5.html" method="post">
+            <h2>Registration Form</h2>
+            
+            <div class="form-row">
+                <div class="form-group half">
+                    <label for="username">Username</label>
+                    <input type="text" id="username" name="username" required>
+                </div>
+                
+                <div class="form-group half">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" required>
+                </div>
+            </div>
+            
+            <div class="form-row">
+                <div class="form-group half">
+                    <label for="combination">Combination</label>
+                    <select id="combination" name="combination" required>
+                        <option value="">Select Combination</option>
+                        <option value="software engineering">Software Engineering</option>
+                        <option value="networking">Networking</option>
+                        <option value="data analysis">Data Analysis</option>
+                    </select>
+                </div>
+                
+                <div class="form-group half">
+                    <label for="intake">Intake</label>
+                    <select id="intake" name="intake" required>
+                        <option value="">Select Intake</option>
+                        <option value="january">January</option>
+                        <option value="may">May</option>
+                        <option value="september">September</option>
+                    </select>
+                </div>
+            </div>
+            
+            <div class="form-row">
+                <div class="form-group half">
+                    <label for="campus">Campus</label>
+                    <select id="campus" name="campus" required>
+                        <option value="">Select Campus</option>
+                        <option value="main">Main Campus</option>
+                        <option value="north">North Campus</option>
+                        <option value="south">South Campus</option>
+                    </select>
+                </div>
+                
+                <div class="form-group half">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label for="dob">Date of Birth</label>
+                <input type="date" id="dob" name="dob" required>
+            </div>
+            
+            <div class="form-group photo-upload">
+                <label>Upload Photo</label>
+                <div class="photo-preview">
+                    <i class="fas fa-user"></i>
+                    <img id="preview" src="#" alt="Photo Preview">
+                </div>
+                <label for="photo-upload" class="upload-btn">Choose Photo</label>
+                <input type="file" id="photo-upload" name="photo" accept="image/*">
+            </div>
+            
+            <button type="submit" class="submit-btn">Register</button>
+        </form>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const photoUpload = document.getElementById('photo-upload');
+            const preview = document.getElementById('preview');
+            const userIcon = document.querySelector('.photo-preview i');
+            
+            photoUpload.addEventListener('change', function() {
+                const file = this.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    
+                    reader.addEventListener('load', function() {
+                        preview.src = this.result;
+                        preview.style.display = 'block';
+                        userIcon.style.display = 'none';
+                    });
+                    
+                    reader.readAsDataURL(file);
+                }
+            });
+            
+            const registrationForm = document.getElementById('registrationForm');
+            
+            registrationForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // Form validation
+                const username = document.getElementById('username').value;
+                const password = document.getElementById('password').value;
+                const combination = document.getElementById('combination').value;
+                const intake = document.getElementById('intake').value;
+                const campus = document.getElementById('campus').value;
+                const email = document.getElementById('email').value;
+                const dob = document.getElementById('dob').value;
+                
+                if (!username || !password || !combination || !intake || !campus || !email || !dob) {
+                    alert('Please fill in all required fields');
+                    return;
+                }
+                
+                if (!photoUpload.files[0]) {
+                    alert('Please upload a photo');
+                    return;
+                }
+                
+                
+                this.submit();
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Admission</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #f4f6f8;
+      color: #333;
+    }
+
+    header {
+      background-color: #0077cc;
+      color: white;
+      padding: 1rem;
+      text-align: center;
+    }
+
+    .container {
+      max-width: 600px;
+      margin: auto;
+      padding: 1rem;
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      margin-top: 2rem;
+      transition: box-shadow 0.3s ease-in-out;
+    }
+
+    .container:hover {
+      animation: borderGlow 2s infinite;
+    }
+
+    h2 {
+      text-align: center;
+      color: #0077cc;
+    }
+
+    label {
+      display: block;
+      margin-top: 1rem;
+    }
+
+    input, select, textarea {
+      width: 100%;
+      padding: 0.7rem;
+      margin-top: 0.3rem;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+      transition: border 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    input:focus, select:focus, textarea:focus {
+      outline: none;
+      border-color: #0077cc;
+      animation: borderGlow 1.5s infinite;
+    }
+
+    button {
+      margin-top: 1.5rem;
+      width: 100%;
+      padding: 0.8rem;
+      background-color: #0077cc;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 1rem;
+    }
+
+    button:hover {
+      background-color: #005fa3;
+    }
+
+    .message {
+      margin-top: 1rem;
+      color: green;
+      text-align: center;
+    }
+
+    @keyframes borderGlow {
+      0% {
+        box-shadow: 0 0 0px rgba(0, 119, 204, 0.5);
+      }
+      50% {
+        box-shadow: 0 0 10px rgba(0, 119, 204, 0.8);
+      }
+      100% {
+        box-shadow: 0 0 0px rgba(0, 119, 204, 0.5);
+      }
+    }
+
+    @media (max-width: 600px) {
+      .container {
+        margin: 1rem;
+        padding: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Admission</h1>
+  </header>
+
+  <div class="container">
+    <h2>Apply Now</h2>
+    <form id="admissionForm">
+      <label for="name">Full Name</label>
+      <input type="text" id="name" required />
+
+      <label for="email">Email Address</label>
+      <input type="email" id="email" required />
+
+      <label for="course">Select Course</label>
+      <select id="course" required>
+        <option value="">-- Choose Course --</option>
+        <option value="Electrical Engineering">Electrical Engineering</option>
+        <option value="Computer Science">Computer Science</option>
+        <option value="Mechanical Engineering">Mechanical Engineering</option>
+      </select>
+
+      <label for="message">Why are you applying?</label>
+      <textarea id="message" rows="4" required></textarea>
+
+      <button type="submit">Submit Application</button>
+      <div class="message" id="formMessage"></div>
+    </form>
+  </div>
+
+  <script>
+    const form = document.getElementById('admissionForm');
+    const formMessage = document.getElementById('formMessage');
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      formMessage.textContent = 'Application submitted successfully!';
+      form.reset();
+    });
+  </script>
+
+</body>
+</html>
