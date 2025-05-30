@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="rw">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kwiga Porogaramu - Kinyarwanda</title>
+    <style>
+        /* Global Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+        
+        body {
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header Styles */
+        header {
+            background-color: #2c3e50;
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+            position: relative;
+        }
+        
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+        
+        .language-switcher {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            display: flex;
+            gap: 10px;
+        }
+        
+        .language-btn {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.9rem;
+        }
+        
+        .language-btn.active {
+            background-color: #2980b9;
+            font-weight: bold;
+        }
+        
+        /* Navigation */
+        nav {
+            background-color: #34495e;
+            padding: 10px 0;
+        }
+        
+        nav ul {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            flex-wrap: wrap;
+        }
+        
+        nav ul li {
+            margin: 0 15px;
+        }
+        
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-size: 1.1rem;
+            padding: 5px 10px;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+        
+        nav ul li a:hover {
+            background-color: #2c3e50;
+        }
+        
+        /* Main Content */
+        main {
+            padding: 30px 0;
+        }
+        
+        .intro {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .intro h2 {
+            font-size: 2rem;
+            color: #2c3e50;
+            margin-bottom: 15px;
+        }
+        
+        /* Language Cards */
+        .language-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+        
+        .language-card {
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .language-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+        
+        .card-header {
+            background-color: #3498db;
+            color: white;
+            padding: 15px;
+            text-align: center;
+        }
+        
+        .card-header h3 {
+            font-size: 1.5rem;
+            margin-bottom: 5px;
+        }
+        
+        .card-body {
+            padding: 20px;
+        }
+        
+        .card-body p {
+            margin-bottom: 15px;
+        }
+        
+        .example {
+            background-color: #f8f9fa;
+            border-left: 4px solid #3498db;
+            padding: 15px;
+            margin: 15px 0;
+            font-family: 'Courier New', monospace;
+            overflow-x: auto;
+        }
+        
+        .example-title {
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #2c3e50;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: #2c3e50;
+            color: white;
+            text-align: center;
+            padding: 20px 0;
+            margin-top: 40px;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2rem;
+            }
+            
+            .language-switcher {
+                position: static;
+                justify-content: center;
+                margin-top: 15px;
+            }
+            
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            nav ul li {
+                margin: 5px 0;
+            }
+            
+            .language-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        
+        .dark-mode {
+            background-color: #121212;
+            color: #f5f5f5;
+        }
+        
+        .dark-mode .language-card {
+            background-color: #1e1e1e;
+            color: #f5f5f5;
+        }
+        
+        .dark-mode .example {
+            background-color: #2d2d2d;
+            color: #f5f5f5;
+        }
+        
+        .dark-mode-toggle {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 100;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="language-switcher">
+                <button class="language-btn active" data-lang="rw">Kinyarwanda</button>
+                <button class="language-btn" data-lang="en">English</button>
+                <button class="language-btn" data-lang="sw">Kiswahili</button>
+            </div>
+            <h1 data-translate="title">Kwiga Porogaramu</h1>
+            <p data-translate="subtitle">Kumenya indimi zose za porogaramu mu Kinyarwanda</p>
+        </div>
+    </header>
+    
+    <nav>
+        <div class="container">
+            <ul>
+                <li><a href="#html" data-translate="nav-html">HTML</a></li>
+                <li><a href="#css" data-translate="nav-css">CSS</a></li>
+                <li><a href="#javascript" data-translate="nav-js">JavaScript</a></li>
+                <li><a href="#python" data-translate="nav-python">Python</a></li>
+                <li><a href="#java" data-translate="nav-java">Java</a></li>
+            </ul>
+        </div>
+    </nav>
+    
+    <main>
+        <div class="container">
+            <section class="intro">
+                <h2 data-translate="welcome-title">Murakaza neza ku isomo ry'ubuhanga bwa porogaramu</h2>
+                <p data-translate="welcome-text">Kuri iyi webpage uzashobora kwiga indimi nyinshi zo gukora porogaramu mu rurimi rwa Kinyarwanda. Buri rurimi ruzaba rugenzuye kandi rufite akarango kagaragaza uko rushobora gukoreshwa.</p>
+            </section>
+            
+            <section id="languages">
+                <div class="language-grid">
+                    
+                    <article id="html" class="language-card">
+                        <div class="card-header">
+                            <h3>HTML</h3>
+                            <p data-translate="html-desc">Ururimi rw'ibara ry'urubuga</p>
+                        </div>
+                        <div class="card-body">
+                            <p data-translate="html-text">HTML (HyperText Markup Language) ni ururimi rwa markup rubaka imiterere y'urubuga. Ni ingenzi cyane kuko ari rwo rutanga imiterere y'ibintu byose uri ku rubuga.</p>
+                            
+                            <div class="example">
+                                <div class="example-title" data-translate="example">Urugero rwa HTML:</div>
+                                <pre>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;title&gt;<span data-translate="html-example-title">Urupapuro rwanjye</span>&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;<span data-translate="html-example-h1">Murakaza neza</span>&lt;/h1&gt;
+    &lt;p&gt;<span data-translate="html-example-p">Ubu ni urupapuro rwanjye rwa mbere.</span>&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+                            </div>
+                        </div>
+                    </article>
+                    
+                    <!-- CSS Card -->
+                    <article id="css" class="language-card">
+                        <div class="card-header">
+                            <h3>CSS</h3>
+                            <p data-translate="css-desc">Ururimi rw'imitako y'urubuga</p>
+                        </div>
+                        <div class="card-body">
+                            <p data-translate="css-text">CSS (Cascading Style Sheets) ni ururimi rubaza uburyo ibintu bimeze kuri webpage. Rukoreshwa hamwe na HTML kugirango urubuga rube rwiza kandi rwihariye.</p>
+                            
+                            <div class="example">
+                                <div class="example-title" data-translate="example">Urugero rwa CSS:</div>
+                                <pre>
+                                    <style>
+                                    body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    color: #333;
+}
+
+h1 {
+    color: #0066cc;
+    text-align: center;
+}
+
+.container {
+    width: 80%;
+    margin: 0 auto;
+
+}
+</style>
+</pre>
+                            </div>
+                        </div>
+                    </article>
+                    
+                    
+                    <article id="javascript" class="language-card">
+                        <div class="card-header">
+                            <h3>JavaScript</h3>
+                            <p data-translate="js-desc">Ururimi rw'imikorere ya webpage</p>
+                        </div>
+                        <div class="card-body">
+                            <p data-translate="js-text">JavaScript ni ururimi rwa porogaramu rukoreshwa kugirango webpage ibe interaktiv. Irashobora guhindura HTML na CSS, gukora calculations, no gukora ibindi byinshi.</p>
+                            
+                            <div class="example">
+                                <div class="example-title" data-translate="example">Urugero rwa JavaScript:</div>
+                                <pre>// <span data-translate="js-example-comment1">Kuvugisha umukoresha</span>
+let izina = prompt("<span data-translate="js-example-prompt1">Andika izina ryawe:</span>");
+alert("<span data-translate="js-example-alert">Murakaza neza</span> " + izina + "!");
+
+// <span data-translate="js-example-comment2">Kubara umubare w'imyaka</span>
+let myaka = parseInt(prompt("<span data-translate="js-example-prompt2">Andika imyaka yawe:</span>"));
+if (myaka >= 18) {
+    console.log("<span data-translate="js-example-log1">Urasobanukiwe kwinjira.</span>");
+} else {
+    console.log("<span data-translate="js-example-log2">Ntabwo urashobora kwinjira.</span>");
+}</pre>
+                            </div>
+                        </div>
+                    </article>
+                    
+                
+                    <article id="python" class="language-card">
+                        <div class="card-header">
+                            <h3>Python</h3>
+                            <p data-translate="python-desc">Ururimi rworoshye rwo gukora porogaramu</p>
+                        </div>
+                        <div class="card-body">
+                            <p data-translate="python-text">Python ni ururimi rwa porogaramu rworoshye cyane kwiga. Rukoreshwa muri byinshi nka web development, data science, artificial intelligence, n'ibindi.</p>
+                            
+                            <div class="example">
+                                <div class="example-title" data-translate="example">Urugero rwa Python:</div>
+                                <pre># <span data-translate="python-example-comment1">Kwerekana ubutumwa</span>
+print("<span data-translate="python-example-print">Murakaza neza ku isomo rya Python!</span>")
+
+# <span data-translate="python-example-comment2">Kubara umubare w'ingano</span>
+n = int(input("<span data-translate="python-example-input">Andika umubare:</span> "))
+if n % 2 == 0:
+    print(f"{n} <span data-translate="python-example-even">ni ingano</span>")
+else:
+    print(f"{n} <span data-translate="python-example-odd">ntabwo ari ingano</span>")
+
+# <span data-translate="python-example-comment3">Kwerekana imyaka</span>
+for i in range(1, 6):
+    print(f"<span data-translate="python-example-loop">Ubu ni umwaka wa</span> {i}")</pre>
+                            </div>
+                        </div>
+                    </article>
+                    
+                  
+                    <article id="java" class="language-card">
+                        <div class="card-header">
+                            <h3>Java</h3>
+                            <p data-translate="java-desc">Ururimi rwa porogaramu rukoreshwa cyane</p>
+                        </div>
+                        <div class="card-body">
+                            <p data-translate="java-text">Java ni ururimi rwa porogaramu rukoreshwa cyane muri enterprise applications, Android development, n'ibindi. Ni ururimi rwa object-oriented.</p>
+                            
+                            <div class="example">
+                                <div class="example-title" data-translate="example">Urugero rwa Java:</div>
+                                <pre>public class Inyandiko {
+    public static void main(String[] args) {
+        // <span data-translate="java-example-comment1">Kwerekana ubutumwa</span>
+        System.out.println("<span data-translate="java-example-print">Murakaza neza ku isomo rya Java!</span>");
+        
+        // <span data-translate="java-example-comment2">Kuvugisha umukoresha</span>
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("<span data-translate="java-example-prompt">Andika izina ryawe:</span> ");
+        String izina = scanner.nextLine();
+        System.out.println("<span data-translate="java-example-greet">Muraho</span> " + izina);
+    }
+}</pre>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </section>
+        </div>
+    </main>
+    
+    <footer>
+        <div class="container">
+            <p data-translate="footer">2024-25 Kwiga Porogaramu. Byose bikubiyemo.</p>
+        </div>
+    </footer>
+    
+    <button class="dark-mode-toggle" onclick="toggleDarkMode()">🌓</button>
+    
+    <script>
+        
+        const translations = {
+            rw: {
+                "title": "Kwiga Porogaramu",
+                "subtitle": "Kumenya indimi zose za porogaramu mu Kinyarwanda",
+                "nav-html": "HTML",
+                "nav-css": "CSS",
+                "nav-js": "JavaScript",
+                "nav-python": "Python",
+                "nav-java": "Java",
+                "welcome-title": "Murakaza neza ku isomo ry'ubuhanga bwa porogaramu",
+                "welcome-text": "Kuri iyi webpage uzashobora kwiga indimi nyinshi zo gukora porogaramu mu rurimi rwa Kinyarwanda. Buri rurimi ruzaba rugenzuye kandi rufite akarango kagaragaza uko rushobora gukoreshwa.",
+                "html-desc": "Ururimi rw'ibara ry'urubuga",
+                "html-text": "HTML (HyperText Markup Language) ni ururimi rwa markup rubaka imiterere y'urubuga. Ni ingenzi cyane kuko ari rwo rutanga imiterere y'ibintu byose uri ku rubuga.",
+                "css-desc": "Ururimi rw'imitako y'urubuga",
+                "css-text": "CSS (Cascading Style Sheets) ni ururimi rubaza uburyo ibintu bimeze kuri webpage. Rukoreshwa hamwe na HTML kugirango urubuga rube rwiza kandi rwihariye.",
+                "js-desc": "Ururimi rw'imikorere ya webpage",
+                "js-text": "JavaScript ni ururimi rwa porogaramu rukoreshwa kugirango webpage ibe interaktiv. Irashobora guhindura HTML na CSS, gukora calculations, no gukora ibindi byinshi.",
+                "python-desc": "Ururimi rworoshye rwo gukora porogaramu",
+                "python-text": "Python ni ururimi rwa porogaramu rworoshye cyane kwiga. Rukoreshwa muri byinshi nka web development, data science, artificial intelligence, n'ibindi.",
+                "java-desc": "Ururimi rwa porogaramu rukoreshwa cyane",
+                "java-text": "Java ni ururimi rwa porogaramu rukoreshwa cyane muri enterprise applications, Android development, n'ibindi. Ni ururimi rwa object-oriented.",
+                "example": "Urugero",
+                "html-example-title": "Urupapuro rwanjye",
+                "html-example-h1": "Murakaza neza",
+                "html-example-p": "Ubu ni urupapuro rwanjye rwa mbere.",
+                "js-example-comment1": "Kuvugisha umukoresha",
+                "js-example-prompt1": "Andika izina ryawe:",
+                "js-example-alert": "Murakaza neza",
+                "js-example-comment2": "Kubara umubare w'imyaka",
+                "js-example-prompt2": "Andika imyaka yawe:",
+                "js-example-log1": "Urasobanukiwe kwinjira.",
+                "js-example-log2": "Ntabwo urashobora kwinjira.",
+                "python-example-comment1": "Kwerekana ubutumwa",
+                "python-example-print": "Murakaza neza ku isomo rya Python!",
+                "python-example-comment2": "Kubara umubare w'ingano",
+                "python-example-input": "Andika umubare:",
+                "python-example-even": "ni ingano",
+                "python-example-odd": "ntabwo ari ingano",
+                "python-example-comment3": "Kwerekana imyaka",
+                "python-example-loop": "Ubu ni umwaka wa",
+                "java-example-comment1": "Kwerekana ubutumwa",
+                "java-example-print": "Murakaza neza ku isomo rya Java!",
+                "java-example-comment2": "Kuvugisha umukoresha",
+                "java-example-prompt": "Andika izina ryawe:",
+                "java-example-greet": "Muraho",
+                "footer": "2024-25 Kwiga Porogaramu. Byose bikubiyemo."
+            },
+            en: {
+                "title": "Learn Programming",
+                "subtitle": "Learn all programming languages in English",
+                "nav-html": "HTML",
+                "nav-css": "CSS",
+                "nav-js": "JavaScript",
+                "nav-python": "Python",
+                "nav-java": "Java",
+                "welcome-title": "Welcome to Programming Lessons",
+                "welcome-text": "On this webpage you can learn many programming languages in English. Each language will be explained with examples showing how it can be used.",
+                "html-desc": "Website markup language",
+                "html-text": "HTML (HyperText Markup Language) is the markup language that structures web content. It's essential as it provides the structure for everything on a webpage.",
+                "css-desc": "Website styling language",
+                "css-text": "CSS (Cascading Style Sheets) is the language that styles how things appear on a webpage. It's used with HTML to make websites beautiful and unique.",
+                "js-desc": "Website behavior language",
+                "js-text": "JavaScript is a programming language used to make webpages interactive. It can modify HTML and CSS, perform calculations, and do many other things.",
+                "python-desc": "Easy programming language",
+                "python-text": "Python is a very easy programming language to learn. It's used in many areas like web development, data science, artificial intelligence, and more.",
+                "java-desc": "Widely used programming language",
+                "java-text": "Java is a programming language widely used in enterprise applications, Android development, and more. It's an object-oriented language.",
+                "example": "Example",
+                "html-example-title": "My Page",
+                "html-example-h1": "Welcome",
+                "html-example-p": "This is my first page.",
+                "js-example-comment1": "Ask user for name",
+                "js-example-prompt1": "Enter your name:",
+                "js-example-alert": "Welcome",
+                "js-example-comment2": "Check age",
+                "js-example-prompt2": "Enter your age:",
+                "js-example-log1": "You are allowed to enter.",
+                "js-example-log2": "You cannot enter.",
+                "python-example-comment1": "Display message",
+                "python-example-print": "Welcome to Python lessons!",
+                "python-example-comment2": "Check if number is even",
+                "python-example-input": "Enter a number:",
+                "python-example-even": "is even",
+                "python-example-odd": "is not even",
+                "python-example-comment3": "Display years",
+                "python-example-loop": "This is year",
+                "java-example-comment1": "Display message",
+                "java-example-print": "Welcome to Java lessons!",
+                "java-example-comment2": "Ask user for name",
+                "java-example-prompt": "Enter your name:",
+                "java-example-greet": "Hello",
+                "footer": "2024-25 Learn Programming. All rights reserved."
+            },
+            sw: {
+                "title": "Jifunze Programu",
+                "subtitle": "Jifunze lugha zote za programu kwa Kiswahili",
+                "nav-html": "HTML",
+                "nav-css": "CSS",
+                "nav-js": "JavaScript",
+                "nav-python": "Python",
+                "nav-java": "Java",
+                "welcome-title": "Karibu kwenye masomo ya programu",
+                "welcome-text": "Kwenye ukurasa huu unaweza kujifunza lugha nyingi za programu kwa Kiswahili. Kila lugha itaelezewa kwa mifano inayoonyesha jinsi inavyoweza kutumika.",
+                "html-desc": "Lugha ya markup ya tovuti",
+                "html-text": "HTML (HyperText Markup Language) ni lugha ya markup inayounda muundo wa maudhui ya wavuti. Ni muhimu kwani hutoa muundo wa kila kitu kwenye ukurasa wa wavuti.",
+                "css-desc": "Lugha ya mitindo ya tovuti",
+                "css-text": "CSS (Cascading Style Sheets) ni lugha inayobainisha jinsi vitu vinavyoonekana kwenye ukurasa wa wavuti. Hutumiwa pamoja na HTML kufanya tovuti ziwe nzuri na za kipekee.",
+                "js-desc": "Lugha ya tabia ya tovuti",
+                "js-text": "JavaScript ni lugha ya programu inayotumiwa kufanya kurasa za wavuti ziwe na mwingiliano. Inaweza kurekebisha HTML na CSS, kufanya mahesabu, na kufanya mambo mengine mengi.",
+                "python-desc": "Lugha rahisi ya programu",
+                "python-text": "Python ni lugha ya programu rahisi sana kujifunza. Hutumiwa katika nyanja nyingi kama ukuzaji wa wavuti, sayansi ya data, akili bandia, na mengineyo.",
+                "java-desc": "Lugha ya programu inayotumiwa sana",
+                "java-text": "Java ni lugha ya programu inayotumiwa sana katika programu za biashara, ukuzaji wa Android, na mengineyo. Ni lugha inayolenga vitu (object-oriented).",
+                "example": "Mfano",
+                "html-example-title": "Ukurasa wangu",
+                "html-example-h1": "Karibu",
+                "html-example-p": "Huu ni ukurasa wangu wa kwanza.",
+                "js-example-comment1": "Uliza jina la mtumiaji",
+                "js-example-prompt1": "Andika jina lako:",
+                "js-example-alert": "Karibu",
+                "js-example-comment2": "Angalia umri",
+                "js-example-prompt2": "Andika umri wako:",
+                "js-example-log1": "Unaweza kuingia.",
+                "js-example-log2": "Huwezi kuingia.",
+                "python-example-comment1": "Onyesha ujumbe",
+                "python-example-print": "Karibu kwenye masomo ya Python!",
+                "python-example-comment2": "Angalia kama namba ni shufwa",
+                "python-example-input": "Andika namba:",
+                "python-example-even": "ni shufwa",
+                "python-example-odd": "si shufwa",
+                "python-example-comment3": "Onyesha miaka",
+                "python-example-loop": "Huu ni mwaka wa",
+                "java-example-comment1": "Onyesha ujumbe",
+                "java-example-print": "Karibu kwenye masomo ya Java!",
+                "java-example-comment2": "Uliza jina la mtumiaji",
+                "java-example-prompt": "Andika jina lako:",
+                "java-example-greet": "Habari",
+                "footer": "2024-25 Jifunze Programu. Haki zote zimehifadhiwa."
+            }
+        };
+
+        
+        let currentLanguage = 'rw';
+
+        
+        function changeLanguage(lang) {
+            currentLanguage = lang;
+            
+            
+            document.querySelectorAll('.language-btn').forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.dataset.lang === lang) {
+                    btn.classList.add('active');
+                }
+            });
+            
+            
+            document.querySelectorAll('[data-translate]').forEach(element => {
+                const key = element.getAttribute('data-translate');
+                if (translations[lang][key]) {
+                    if (element.tagName === 'INPUT' || element.tagName === 'TEXTAREA') {
+                        element.value = translations[lang][key];
+                    } else {
+                        element.innerHTML = translations[lang][key];
+                    }
+                }
+            });
+            
+            
+            localStorage.setItem('preferredLanguage', lang);
+        }
+
+        
+        document.querySelectorAll('.language-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                changeLanguage(this.dataset.lang);
+            });
+        });
+
+        
+        function toggleDarkMode() {
+            document.body.classList.toggle('dark-mode');
+            const isDarkMode = document.body.classList.contains('dark-mode');
+            localStorage.setItem('darkMode', isDarkMode);
+            
+            const button = document.querySelector('.dark-mode-toggle');
+            button.textContent = isDarkMode ? '☀️' : '🌙';
+        }
+        
+        
+        document.addEventListener('DOMContentLoaded', () => {
+            
+            const savedLanguage = localStorage.getItem('preferredLanguage') || 'rw';
+            changeLanguage(savedLanguage);
+            
+            
+            const darkMode = localStorage.getItem('darkMode') === 'true';
+            if (darkMode) {
+                document.body.classList.add('dark-mode');
+                document.querySelector('.dark-mode-toggle').textContent = '☀️';
+            }
+            
+            
+            document.querySelectorAll('nav a').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href');
+                    const targetElement = document.querySelector(targetId);
+                    targetElement.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                });
+            });
+        });
+    </script>
+</body>
+</html>
