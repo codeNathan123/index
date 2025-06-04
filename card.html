@@ -775,23 +775,23 @@
         const rollInput = document.getElementById('rollInput');
         const activateBtn = document.getElementById('activateBtn');
         
-        // Set up canvas for signature
+       
         const ctx = signatureCanvas.getContext('2d');
         let isDrawing = false;
         let lastX = 0;
         let lastY = 0;
         
-        // Set canvas size to match container
+        
         signatureCanvas.width = signatureArea.offsetWidth;
         signatureCanvas.height = signatureArea.offsetHeight;
         
-        // Initialize canvas
+      
         ctx.strokeStyle = '#1a2a6c';
         ctx.lineWidth = 2;
         ctx.lineCap = 'round';
         ctx.lineJoin = 'round';
         
-        // Signature drawing functions
+       
         function startDrawing(e) {
             isDrawing = true;
             [lastX, lastY] = [e.offsetX, e.offsetY];
@@ -819,7 +819,7 @@
         signatureCanvas.addEventListener('mouseup', stopDrawing);
         signatureCanvas.addEventListener('mouseout', stopDrawing);
         
-        // Touch events for mobile devices
+        
         signatureCanvas.addEventListener('touchstart', e => {
             e.preventDefault();
             const rect = signatureCanvas.getBoundingClientRect();
@@ -908,7 +908,7 @@
             }, 5000);
         }
         
-        // Form submission
+      
         registrationForm.addEventListener('submit', function(e) {
             e.preventDefault();
             
@@ -922,27 +922,27 @@
             const session = document.getElementById('session').value;
             const payerName = document.getElementById('payerName').value;
             
-            // Validate email
+            
             const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
             if (!emailRegex.test(email)) {
                 showNotification('Please enter a valid email address', 'error');
                 return;
             }
             
-            // Check if photo is uploaded
+            
             if (!photoInput.files[0]) {
                 showNotification('Please upload your photo', 'error');
                 return;
             }
             
-            // Check if signature is provided
+            
             const isEmptyCanvas = signatureCanvas.toDataURL() === document.createElement('canvas').toDataURL();
             if (isEmptyCanvas) {
                 showNotification('Please provide a signature for payment authorization', 'error');
                 return;
             }
             
-            // Check if payer name is provided
+            
             if (!payerName.trim()) {
                 showNotification('Please enter the payer\'s name', 'error');
                 return;
@@ -963,17 +963,17 @@
             previewStatus.style.fontWeight = 'bold';
             rollNumber.textContent = generatedRoll;
             
-            // Update signature preview on card
+            
             const signatureData = signatureCanvas.toDataURL();
             cardSignaturePreview.innerHTML = `<img src="${signatureData}" alt="Signature">`;
             
-            // Show roll number entry section
+            
             rollEntrySection.style.display = 'block';
             
-            // Show success message
+            
             showNotification(`Registration successful! Your roll number (${generatedRoll}) has been sent to ${email}. Please enter it below to activate your student card.`);
             
-            // Scroll to roll entry section
+            
             rollEntrySection.scrollIntoView({ behavior: 'smooth' });
         });
         
