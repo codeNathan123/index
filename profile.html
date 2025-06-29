@@ -3,43 +3,56 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Profile</title>
+    <title>Sibomana Nathan - Profile</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Arial', sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
         
         body {
             color: #fff;
             line-height: 1.6;
             overflow-x: hidden;
+            background: #0a192f;
+            position: relative;
         }
         
-       .background {
-    
-    width: 10px;       
-    height: 10vh;
-    background-image: url("hhhhhhh.jpg");
-   
-    background-position: center; 
-    background-repeat: no-repeat;
-    
-    filter: brightness(0.7);
-    
-    
-    object-fit: cover;
-}
+        .background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #1a1f2e 0%, #0d1b2a 100%);
+            z-index: -2;
+        }
         
-        .overlay {
+        .background::before {
+            content: '';
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.5);
+            background-image: url("hhhhhhh.jpg");
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            filter: brightness(0.3) blur(2px);
+            opacity: 0.7;
+        }
+        
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(10, 25, 47, 0.9) 0%, rgba(13, 27, 42, 0.95) 100%);
             z-index: -1;
         }
         
@@ -50,57 +63,80 @@
             min-height: 100vh;
             display: flex;
             flex-direction: column;
+            position: relative;
+            z-index: 1;
         }
         
         header {
             text-align: center;
             margin-bottom: 50px;
             padding: 0 15px;
+            animation: fadeIn 1s ease-out;
         }
         
         .profile-pic {
-            width: 150px;
-            height: 150px;
+            width: 180px;
+            height: 180px;
             border-radius: 50%;
             object-fit: cover;
-            border: 5px solid rgba(255, 255, 255, 0.3);
+            border: 5px solid rgba(100, 255, 218, 0.3);
             margin-bottom: 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .profile-pic:hover {
+            transform: scale(1.05);
+            border-color: rgba(100, 255, 218, 0.6);
+            box-shadow: 0 8px 25px rgba(100, 255, 218, 0.2);
         }
         
         h1 {
-            font-size: 2.5rem;
+            font-size: 2.8rem;
             margin-bottom: 10px;
+            background: linear-gradient(90deg, #64ffda, #57cbff);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            letter-spacing: 1px;
         }
         
         .tagline {
-            font-size: 1.2rem;
+            font-size: 1.3rem;
             opacity: 0.9;
             margin-bottom: 20px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            color: #ccd6f6;
         }
         
         .social-links {
             display: flex;
             justify-content: center;
-            gap: 15px;
+            gap: 20px;
             margin-bottom: 30px;
         }
         
         .social-links a {
-            color: white;
-            font-size: 1.5rem;
-            transition: transform 0.3s;
-            width: 40px;
-            height: 40px;
+            color: #a8b2d1;
+            font-size: 1.8rem;
+            transition: all 0.3s;
+            width: 55px;
+            height: 55px;
             display: flex;
             align-items: center;
             justify-content: center;
-            background: rgba(255, 255, 255, 0.1);
+            background: rgba(100, 255, 218, 0.1);
             border-radius: 50%;
+            border: 2px solid rgba(100, 255, 218, 0.2);
         }
         
         .social-links a:hover {
-            transform: translateY(-3px);
-            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-5px);
+            background: rgba(100, 255, 218, 0.2);
+            color: #64ffda;
+            box-shadow: 0 5px 15px rgba(100, 255, 218, 0.2);
         }
         
         .content {
@@ -114,18 +150,33 @@
         .section {
             flex: 1;
             min-width: 300px;
-            background: rgba(255, 255, 255, 0.1);
+            background: rgba(23, 42, 69, 0.7);
             backdrop-filter: blur(10px);
-            padding: 25px;
-            border-radius: 10px;
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 30px;
+            border-radius: 15px;
+            border: 1px solid rgba(100, 255, 218, 0.1);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .section:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+            border-color: rgba(100, 255, 218, 0.3);
         }
         
         h2 {
             font-size: 1.8rem;
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid rgba(100, 255, 218, 0.3);
+            color: #64ffda;
+        }
+        
+        .section p {
             margin-bottom: 15px;
-            padding-bottom: 10px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+            color: #ccd6f6;
+            line-height: 1.8;
         }
         
         ul {
@@ -134,57 +185,102 @@
         }
         
         li {
-            margin-bottom: 8px;
+            margin-bottom: 12px;
+            color: #a8b2d1;
+            padding-left: 10px;
+            position: relative;
+        }
+        
+        li:before {
+            content: "▹";
+            position: absolute;
+            left: -15px;
+            color: #64ffda;
         }
         
         .thanks-section {
             text-align: center;
             margin-top: auto;
-            padding: 30px;
-            background: rgba(0, 0, 0, 0.3);
-            border-radius: 10px;
+            padding: 40px 30px;
+            background: rgba(23, 42, 69, 0.7);
+            border-radius: 15px;
             margin: 0 15px;
+            border: 1px solid rgba(100, 255, 218, 0.1);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(5px);
         }
         
         .thanks-section h2 {
             border: none;
-            margin-bottom: 20px;
+            margin-bottom: 25px;
+            font-size: 2.2rem;
         }
         
         .thanks-section p {
-            font-size: 1.1rem;
+            font-size: 1.2rem;
             max-width: 800px;
             margin: 0 auto;
+            color: #ccd6f6;
+            line-height: 1.8;
         }
         
         .home-btn {
             position: fixed;
-            top: 20px;
-            left: 20px;
+            top: 30px;
+            left: 30px;
             z-index: 100;
-            background: rgba(255, 255, 255, 0.2);
-            border: none;
-            color: white;
-            padding: 10px 20px;
-            border-radius: 5px;
+            background: rgba(100, 255, 218, 0.1);
+            border: 1px solid rgba(100, 255, 218, 0.3);
+            color: #64ffda;
+            padding: 12px 25px;
+            border-radius: 30px;
             cursor: pointer;
             transition: all 0.3s;
             text-decoration: none;
             font-size: 16px;
+            font-weight: 500;
             backdrop-filter: blur(5px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
         
         .home-btn:hover {
-            background: rgba(255, 255, 255, 0.3);
-            transform: translateY(-2px);
+            background: rgba(100, 255, 218, 0.2);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(100, 255, 218, 0.2);
         }
         
-        .home-btn a {
-            color: white;
-            text-decoration: none;
+        .home-btn i {
+            font-size: 1.2rem;
         }
         
-        /* Responsive adjustments */
+        /* Animation */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .section {
+            animation: fadeIn 0.8s ease-out;
+        }
+        
+        .section:nth-child(1) { animation-delay: 0.1s; }
+        .section:nth-child(2) { animation-delay: 0.2s; }
+        .section:nth-child(3) { animation-delay: 0.3s; }
+        
+        .thanks-section {
+            animation: fadeIn 0.8s ease-out 0.4s both;
+        }
+        
+        
         @media (max-width: 768px) {
             .container {
                 padding: 20px 10px;
@@ -195,69 +291,86 @@
             }
             
             h1 {
-                font-size: 2rem;
+                font-size: 2.2rem;
             }
             
             .tagline {
-                font-size: 1rem;
+                font-size: 1.1rem;
             }
             
             .profile-pic {
-                width: 120px;
-                height: 120px;
+                width: 150px;
+                height: 150px;
             }
             
             .content {
-                gap: 20px;
-                flex-direction: column;
+                gap: 25px;
             }
             
             .section {
                 min-width: 100%;
+                padding: 25px;
             }
             
             h2 {
-                font-size: 1.5rem;
+                font-size: 1.6rem;
             }
             
             .thanks-section {
-                padding: 20px 15px;
+                padding: 30px 20px;
             }
             
             .thanks-section p {
-                font-size: 1rem;
+                font-size: 1.1rem;
             }
             
             .home-btn {
-                padding: 8px 15px;
+                padding: 10px 20px;
                 font-size: 14px;
+                top: 20px;
+                left: 20px;
+            }
+            
+            .social-links a {
+                width: 50px;
+                height: 50px;
+                font-size: 1.6rem;
             }
         }
         
         @media (max-width: 480px) {
             h1 {
-                font-size: 1.8rem;
+                font-size: 1.9rem;
             }
             
             .profile-pic {
-                width: 100px;
-                height: 100px;
+                width: 130px;
+                height: 130px;
             }
             
             .section {
-                padding: 20px 15px;
+                padding: 20px;
+            }
+            
+            .home-btn {
+                padding: 8px 15px;
+                font-size: 13px;
+                top: 15px;
+                left: 15px;
             }
             
             .social-links a {
-                width: 35px;
-                height: 35px;
-                font-size: 1.2rem;
+                width: 45px;
+                height: 45px;
+                font-size: 1.4rem;
             }
         }
     </style>
 </head>
 <body>
-    <a href="ulk.html" class="home-btn">Home</a>
+    <a href="ulk.html" class="home-btn">
+        <i class="fas fa-arrow-left"></i> Home
+    </a>
     
     <div class="background"></div>
     <div class="overlay"></div>
@@ -266,7 +379,7 @@
         <header>
             <img src="vub.jpg" alt="Profile Picture" class="profile-pic">
             <h1>Sibomana Nathan</h1>
-            <p class="tagline">Web Developer & Graphics Designer</p>
+            <p class="tagline">Web Developer & Graphics Designer with expertise in Cybersecurity</p>
             <div class="social-links">
                 <a href="#"><i class="fab fa-twitter"></i></a>
                 <a href="#"><i class="fab fa-linkedin"></i></a>
@@ -278,41 +391,62 @@
         <div class="content">
             <div class="section">
                 <h2>About Me</h2>
-                <p>Hello! I'm Nathan, a passionate web developer with over 5 years of experience creating beautiful, functional websites. I specialize in front-end development but also enjoy working with back-end technologies.</p>
+                <p>Hello! I'm Nathan, a passionate web developer and cybersecurity enthusiast with over 5 years of experience creating beautiful, functional websites. I specialize in front-end development but also enjoy working with back-end technologies and security implementations.</p>
+                <p>With a keen eye for design and a passion for secure coding practices, I create digital experiences that are both visually appealing and protected against vulnerabilities.</p>
                 <p>When I'm not coding, you can find me hiking, reading sci-fi novels, or experimenting with new recipes in the kitchen.</p>
             </div>
             
             <div class="section">
-                <h2>Skills</h2>
+                <h2>Skills & Expertise</h2>
                 <ul>
-                    <li>HTML5, CSS3, JavaScript</li>
-                    <li>React, Vue.js</li>
-                    <li>Node.js, Express</li>
-                    <li>UI/UX Design</li>
-                    <li>PHP</li>
-                    <li>JavaScript</li>
-                    <li>Cyber Security</li>
-                    <li>Responsive Design</li>
-                    <li>Git & Version Control</li>
+                    <li><strong>Web Development:</strong> HTML5, CSS3, JavaScript (ES6+)</li>
+                    <li><strong>Frontend Frameworks:</strong> React, Vue.js, Angular</li>
+                    <li><strong>Backend Technologies:</strong> Node.js, Express, PHP</li>
+                    <li><strong>Cybersecurity:</strong> Vulnerability Assessment, Penetration Testing, Secure Coding</li>
+                    <li><strong>Design:</strong> UI/UX Design, Responsive Design, Adobe Creative Suite</li>
+                    <li><strong>Database:</strong> MongoDB, MySQL, PostgreSQL</li>
+                    <li><strong>Tools:</strong> Git, Docker, Webpack, CI/CD Pipelines</li>
+                    <li><strong>Other:</strong> RESTful APIs, GraphQL, WebSockets</li>
                 </ul>
             </div>
             
             <div class="section">
                 <h2>Contact</h2>
-                <p>Email: nathansibomana367@gmail.com</p>
-                <p>Phone: +250 786562408</p>
-                <p>Location: Rwanda, Rubavu, Gisenyi City</p>
-                <p>Available for freelance work and collaborations.</p>
+                <p><i class="fas fa-envelope"></i> Email: nathansibomana367@gmail.com</p>
+                <p><i class="fas fa-phone"></i> Phone: +250 786562408</p>
+                <p><i class="fas fa-map-marker-alt"></i> Location: Rwanda, Rubavu, Gisenyi City</p>
+                <p><i class="fas fa-globe"></i> Portfolio: www.nathansibomana.com</p>
+                <p style="margin-top: 20px; padding-top: 15px; border-top: 1px solid rgba(100, 255, 218, 0.1);">
+                    <i class="fas fa-briefcase"></i> Available for freelance work, collaborations, and full-time opportunities.
+                </p>
             </div>
         </div>
         
         <div class="thanks-section">
-            <h2>Thank You!</h2>
-            <p>Thank you for visiting my profile. I appreciate you taking the time to learn more about me and my work. If you'd like to get in touch or discuss potential projects, please don't hesitate to reach out. Have a wonderful day!</p>
+            <h2>Thank You For Visiting!</h2>
+            <p>Thank you for taking the time to explore my profile. I appreciate your interest in my work and expertise. If you'd like to discuss potential projects, collaborations, or just want to connect, please don't hesitate to reach out. I'm always open to new opportunities and interesting conversations. Have a wonderful day!</p>
         </div>
     </div>
     
-    <!-- Font Awesome for icons -->
-    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <script>
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            const sections = document.querySelectorAll('.section, .thanks-section');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.animation = 'fadeIn 0.8s ease-out forwards';
+                    }
+                });
+            }, {
+                threshold: 0.1
+            });
+            
+            sections.forEach(section => {
+                observer.observe(section);
+            });
+        });
+    </script>
 </body>
 </html>
